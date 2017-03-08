@@ -18,6 +18,13 @@ using std::cout;
 using std::setprecision;
 using std::endl;
 
+const int SLOPE_MAX = 40;
+const int SLOPE_STEP = 2;
+
+const int WIND_MAX = 40;
+const int WIND_STEP = 2;
+
+
 void UpdateInputs(BehaveRun& behave, int modelId, SurfaceInputsShort si)
 {
     behave.updateSurfaceInputs(
@@ -40,7 +47,7 @@ void UpdateInputs(BehaveRun& behave, int modelId, SurfaceInputsShort si)
 
 void PrintHeader()
 {
-    cout << "Model#," << "SpreadRate," << "FlameLength" << endl;
+    cout << "Model#," << "SpreadRate," << "FlameLength," << "Slope," << "Windspeed" << endl;
 }
 
 void process()
@@ -55,11 +62,21 @@ void process()
     PrintHeader();
     for(auto fuelModelNumber : modelIds)
     {
-        UpdateInputs(behave, fuelModelNumber, si);
-        behave.doSurfaceRunInDirectionOfMaxSpread();
-        cout << fuelModelNumber << ","
-             << behave.getSurfaceFireSpreadRate(SpeedUnits::MILES_PER_HOUR) << ","
-             << behave.getSurfaceFlameLength(LengthUnits::FEET)
-             << endl;
+        for(int slope = 0; slope < SLOPE_MAX; slope += SLOPE_STEP)
+        {
+            for(int windspeed = 0; windspeed < WIND_MAX; windspeed += WIND_STEP)
+            {
+                si.slope = slope;
+                si.windSpeed = windspeed;
+                UpdateInputs(behave, fuelModelNumber, si);
+                behave.doSurfaceRunInDirectionOfMaxSpread();
+                cout << fuelModelNumber << ","
+                     << behave.getSurfaceFireSpreadRate(SpeedUnits::MILES_PER_HOUR) << ","
+                     << behave.getSurfaceFlameLength(LengthUnits::FEET) << ","
+                     << slope << ","
+                     << windspeed
+                     << endl;
+            }
+        }
     }
  }

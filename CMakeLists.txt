@@ -6,10 +6,10 @@
 # and links to the qtmain.lib library on Windows.
 # *****************************************************************************
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5.1)
 
 # Make use of c++11
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_STANDARD 11)
 
 PROJECT(behave)
 
@@ -24,7 +24,7 @@ IF(CLI)
     ADD_DEFINITIONS(-DCLI)
 ENDIF(CLI)
 
-OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" OFF)
+OPTION(RAWS_BATCH "Enable Behave RAWS Data Batch Reader" ON)
 IF(RAWS_BATCH)
     ADD_DEFINITIONS(-DRAWS_BATCH)
 ENDIF(RAWS_BATCH)

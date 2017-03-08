@@ -71,7 +71,7 @@ void process()
                 UpdateInputs(behave, fuelModelNumber, si);
                 behave.doSurfaceRunInDirectionOfMaxSpread();
                 cout << fuelModelNumber << ","
-                     << behave.getSurfaceFireSpreadRate(SpeedUnits::MILES_PER_HOUR) << ","
+                     << behave.getSurfaceFireSpreadRate(SpeedUnits::FEET_PER_MINUTE) << ","
                      << behave.getSurfaceFlameLength(LengthUnits::FEET) << ","
                      << slope << ","
                      << windspeed

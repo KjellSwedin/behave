@@ -149,7 +149,10 @@ IF(FCCS_CWALK)
     ADD_EXECUTABLE(fccs_cwalk
         ${SOURCE}
         src/fccs_cwalk/crosswalk.cpp
-        ${HEADERS})
+        src/fccs_cwalk/main.cpp
+        ${HEADERS}
+        src/fccs_cwalk/crosswalk.h
+        )
 ENDIF(FCCS_CWALK)
 
 IF(GUI)

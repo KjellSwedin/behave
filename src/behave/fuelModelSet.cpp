@@ -139,11 +139,23 @@ void FuelModelSet::setFuelModelRecord(int fuelModelNumber, std::string code, std
     FuelModelArray[fuelModelNumber].isDefined_ = true;
 }
 
+void
+FuelModelSet::getModelIds(std::vector<int>& fillMe) const
+{
+    for(auto rec : FuelModelArray)
+    {
+        if(rec.fuelModelNumber_ > 0)
+        {
+            fillMe.push_back(rec.fuelModelNumber_);
+        }
+    }
+}
+
 // PopulateFuelModels() fills FuelModelArray[] with the standard fuel model parameters
 // as well as earmarking which models are available for use as custom models
 void FuelModelSet::populateFuelModels()
 {
-    // See Standard Fire Behavior Fuel Models: A Comprehensive Set for Use with Rothermel’s
+    // See Standard Fire Behavior Fuel Models: A Comprehensive Set for Use with RothermelÂ’s
     // Surface Fire Spread Model by Joe H.Scott and Robert E.Burgan, 2005
     // https://www.fs.fed.us/rm/pubs/rmrs_gtr153.pdf
 

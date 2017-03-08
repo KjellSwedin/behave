@@ -36,6 +36,8 @@
 #include <string>
 #include <vector>
 
+
+
 // TODO: Add in a std::map to map fuel codes to the respective fuel model number in FuelModelArray -WMC 02/2017
 
 class FuelModelSet
@@ -70,6 +72,7 @@ public:
     double getSavrLiveWoody(int fuelModelNumber) const;
     bool getIsDynamic(int fuelModelNumber) const;
     bool isFuelModelDefined(int fuelModelNumber) const;
+    void getModelIds(std::vector<int>&) const;
 
 private:
     void memberwiseCopyAssignment(const FuelModelSet& rhs);

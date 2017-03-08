@@ -15,9 +15,13 @@ PROJECT(behave)
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/behave
                     ${CMAKE_SOURCE_DIR}/src/behave_qt
-                    ${CMAKE_SOURCE_DIR}/src/canopy_flow
                     ${CMAKE_SOURCE_DIR}/src/cli
                     ${CMAKE_SOURCE_DIR}/src/qcustomplot)      
+
+OPTION(FCCS_CWALK "Enable FCCS Crosswalk data generator" ON)
+IF(FCCS_CWALK)
+    ADD_DEFINITIONS(-DFCCS_CWALK)
+ENDIF(FCCS_CWALK)
 
 OPTION(CLI "Enable Behave CLI" OFF)
 IF(CLI)
@@ -140,6 +144,13 @@ IF(CLI)
         src/cli/behaveCli.cpp
         ${HEADERS})
 ENDIF(CLI)
+
+IF(FCCS_CWALK)
+    ADD_EXECUTABLE(fccs_cwalk
+        ${SOURCE}
+        src/fccs_cwalk/crosswalk.cpp
+        ${HEADERS})
+ENDIF(FCCS_CWALK)
 
 IF(GUI)
     # Set up Qt
